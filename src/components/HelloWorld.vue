@@ -1,9 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 defineProps<{ msg: string }>()
 
 const count = ref(0)
+
+const eventLoopFunc = () => {
+  count.value += 1
+  requestAnimationFrame(eventLoopFunc)
+}
+
+onMounted(() => {
+  eventLoopFunc()
+})
 </script>
 
 <template>
